@@ -68,20 +68,17 @@ module.exports = {
   dashboard: async (req, res) => {
     try {
       const users = await Model.userModel.count({ where: { role: "1" } });
-      const contact = await Model.contactUsModel.count({});
       const provider = await Model.userModel.count({ where: { role: "2" } });
+      const contacts = await Model.contactUsModel.count({});
       const interest = await Model.interestModel.count({});
       const prefrence = await Model.prefrenceModel.count({});
       const category = await Model.categoryModel.count({});
       const event = await Model.eventModel.count({});
       const faq = await Model.faqModel.count({});
-      const contacts = await Model.contactUsModel.count({});
-      const review = await Model.reviewModel.count({})
-
-
+      const review = await Model.reviewModel.count({});
 
       const usersByMonth = await Model.userModel.findAll({
-        where: { role: ["1"] },
+        where: { role: ['1', '2'] },
         attributes: [
           [Sequelize.fn("MONTH", Sequelize.col("createdAt")), "month"],
           [Sequelize.fn("COUNT", Sequelize.col("id")), "count"],
@@ -95,25 +92,23 @@ module.exports = {
       usersByMonth.forEach((item) => {
         chartData[item.month - 1] = parseInt(item.count, 10);
       });
-
       res.render("dashboard", {
         session: req.session.admin,
-        title: 'Dashboard',
+        title: "Dashboard",
         chartData,
         users,
-        contact,
         provider,
-        category,
+        contacts,
         interest,
         prefrence,
+        category,
         event,
         faq,
-        contacts,
-        review
+        review,
       });
     } catch (error) {
-      throw error ;
-
+      console.error(error);
+      res.status(500).send("Internal Server Error");
     }
   },
   login: async (req, res) => {
@@ -1100,7 +1095,7 @@ module.exports = {
       });
     } catch (error) {
       throw error;
- 
+
     }
   },
   reviewStatus: async (req, res) => {
@@ -1156,7 +1151,7 @@ module.exports = {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || 10;
       const offset = (page - 1) * limit;
-  
+
       const { count, rows } = await Model.giveawayModel.findAndCountAll({
         limit,
         offset,
@@ -1165,23 +1160,23 @@ module.exports = {
           {
             model: Model.userModel,
             as: "sender",
-           
+
           },
           {
             model: Model.userModel,
             as: "receiver",
-           
+
           },
           {
             model: Model.eventModel,
             as: "event",
-        
+
           },
         ],
       });
-  
+
       const totalPages = Math.ceil(count / limit);
-  
+
       res.render("giveaway/giveawaylist.ejs", {
         title: "Giveaways",
         data: rows,
@@ -1204,7 +1199,7 @@ module.exports = {
       throw error;
     }
   },
- 
+
 };
 
 
