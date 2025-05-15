@@ -250,7 +250,7 @@
                     swalWithBootstrapButtons
                       .fire({
                         title: "Deleted!",
-                        text: "The faq has been deleted.",
+                        text: "The prefrence has been deleted.",
                         icon: "success",
                       })
                       .then(() => {
@@ -268,7 +268,7 @@
                 error: function () {
                   swalWithBootstrapButtons.fire({
                     title: "Error!",
-                    text: "An error occurred while deleting the faq",
+                    text: "An error occurred while deleting the prefrence",
                     icon: "error",
                   });
                 },
@@ -276,7 +276,7 @@
             } else if (result.dismiss === Swal.DismissReason.cancel) {
               swalWithBootstrapButtons.fire({
                 title: "Cancelled",
-                text: "The faq is safe",
+                text: "The prefrence is safe",
                 icon: "error",
               });
             }
