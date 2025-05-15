@@ -1,0 +1,116 @@
+<footer class="footer footer-static footer-light">
+    <p class="clearfix mb-0"><span class="float-md-start d-block d-md-inline-block mt-25">COPYRIGHT  &copy; 2024
+      <a href="#" style="color: #8f89af;;">Spoto</a><span class="d-none d-sm-inline-block">, All rights Reserved</span></span><span class="float-md-end d-none d-md-block">
+</footer>
+<button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
+
+<% if(messages.success){ %>
+    <script>
+
+      toastr.options = {
+        "debug": false,
+        "onclick": null,
+        "showDuration": "5000",
+        "hideDuration": "5000",
+        "timeOut": "5000",
+        "extendedTimeOut": "5000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "slideDown",
+        "hideMethod": "slideUp"
+      }
+      toastr.success('<%= messages.success%>')
+    </script>
+    <% } %>
+
+      <% if(messages.error){ %>
+        <script>
+
+          toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "500",
+            "hideDuration": "5000",
+            "timeOut": "5000",
+            "extendedTimeOut": "5000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "slideDown",
+            "hideMethod": "slideUp"
+          }
+          toastr.error('<%= messages.error%>')
+        </script>
+        <% } %>
+        <script>
+  const debounce = (func, wait) => {
+      let timeout;
+      return function (...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+  };
+
+  const searchTable = () => {
+    const searchValue = document.getElementById("searchInput").value.trim().toLowerCase();
+    const tableBody = document.querySelector("#myTable tbody");
+    const tableRows = document.querySelectorAll("#myTable tbody tr:not(#no-data-row)");
+    let noDataFound = true;
+
+    tableRows.forEach((row) => {
+      
+        const cells = row.querySelectorAll("td:not(:nth-child(5))"); 
+        let rowText = "";
+
+        cells.forEach(cell => {
+            rowText += cell.innerText.toLowerCase() + " "; 
+        });
+
+        const statusText = row.querySelector("td:nth-child(5) button")?.innerText.toLowerCase() || "";
+
+        if (rowText.includes(searchValue) || statusText === searchValue) {
+            row.style.display = "";
+            noDataFound = false;
+        } else {
+            row.style.display = "none";
+        }
+    });
+
+    let noDataRow = document.getElementById("no-data-row");
+
+    if (noDataFound) {
+        if (!noDataRow) {
+            noDataRow = document.createElement("tr");
+            noDataRow.id = "no-data-row";
+            noDataRow.innerHTML = '<td colspan="8" style="text-align: center; font-weight: bold; color: gray;"> No data found</td>';
+            tableBody.appendChild(noDataRow);
+        }
+    } else {
+        if (noDataRow) noDataRow.remove();
+    }
+};
+
+document.getElementById("searchInput").addEventListener("keyup", debounce(searchTable, 300));
+
+       </script>
+
+     <!-- use for search -->
+<script src="../../../assets/js/my.js"></script>
+<!-- bootstrap js files -->
+<script src="../../../assets/js/popper.min.js"></script>
+<!-- <script src="./../../assets/js/bootstrap.min.js"></script> -->
+<script src="../../../assets/js/bootstrap.min.js"></script>
+<script>
+  $(window).on("load", function () {
+    if (feather) {
+      feather.replace({
+        width: 14,
+        height: 14,
+      });
+    }
+  });
+</script>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <style>
+    .main-img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.thumb-img {
+  width: 100px;
+  margin-top: 10px;
+  object-fit: cover;
+}
+
+  </style>
+<%- include('../common/header.ejs'); %>
+
+  <body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click"
+    data-menu="vertical-menu-modern" data-col="">
+    <%- include('../common/navbar.ejs'); %>
+      <%- include('../common/sidebar.ejs'); %>
+
+
+        <div class="app-content content">
+          <div class="content-overlay"></div>
+          <div class="header-navbar-shadow"></div>
+          <div class="content-wrapper">
+            <div class="content-body">
+              <div class="auth-wrapper">
+                <div class="auth-inner py-2">
+                  <div class="card mb-0">
+                    <div class="card-body">
+                      <form id="validate" class="auth-register-form"  method="POST"
+                        enctype="multipart/form-data" novalidate>
+                        <div class="col-md-12 mb-1">
+                          <% if (eventDetails.eventimages && eventDetails.eventimages.length > 0) { %>
+                            <div class="pto_imgs">
+                              <!-- Display the main image -->
+                              <img src="<%= eventDetails.eventimages[0].image %>" alt="Main Image" class=""/>
+                        
+                              <!-- Display the rest of the images -->
+                              <% eventDetails.eventimages.slice(1).forEach(function(image) { %>
+                                
+                                  <img src="<%= image.image %>" alt="Other Image" class=""/>
+                               
+                              <% }); %>
+                            </div>
+                          <% } else { %>
+                            <p>No images available for this event.</p>
+                          <% } %>
+                        </div>
+                        
+                       
+                        <div class="row">
+                          <div class="mb-1 col-6">
+                            <label for="text" class="form-label">Title</label>
+                            <input type="text" class="form-control" 
+                              minlength="2" maxlength="50" value="<%= eventDetails?.title%>" disabled />
+                              
+                          </div>
+                          <div class="mb-1 col-6">
+                            <label for="text" class="form-label">Description</label>
+                            <input type="text" class="form-control" 
+                              minlength="2" maxlength="50" value="<%= eventDetails.description%>" disabled />
+                             
+                          </div>
+                          <div class="mb-1 col-6">
+                            <label for="text" class="form-label">Event Date</label>
+                            <input type="text" class="form-control" 
+                              minlength="2" maxlength="50" value="<%= eventDetails.eventDate%>" disabled />
+                          
+                          </div>
+                          <div class="mb-1 col-6">
+                            <label for="text" class="form-label">Event Time</label>
+                            <input type="text" class="form-control"  
+                              minlength="2" maxlength="50" value="<%= eventDetails.eventTime%>" disabled />
+                         
+                          </div>
+                          <div class="mb-1 col-6">
+                            <label for="categoryId" class="form-label">Category</label>
+                          
+                            <input type="text" class="form-control"  
+                            minlength="2" maxlength="50" value="<%= eventDetails?.category?.name%>" disabled />
+                          </div>
+                        
+                          <div class="mb-1 col-6">
+                            <label for="userId" class="form-label">Provider</label>
+                            <input type="text" class="form-control" 
+                                   minlength="2" maxlength="50" 
+                                   value="<%= eventDetails?.user?.firstName + ' ' + eventDetails?.user?.lastName %>" disabled />
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                       
+                          <a class="btn btn-primary" href="/eventlist">Back</a>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- include('../common/footer.ejs'); %>
+
+          <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+          <script src="../../../app-assets/js/core/app-menu.js"></script>
+          <script src="../../../app-assets/js/core/app.js"></script>
+         
+
+        
+
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<%- include('../common/header.ejs'); %>
+
+  <body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click"
+    data-menu="vertical-menu-modern" data-col="">
+    <%- include('../common/navbar.ejs'); %>
+      <%- include('../common/sidebar.ejs'); %>
+
+
+        <div class="app-content content">
+          <div class="content-overlay"></div>
+          <div class="header-navbar-shadow"></div>
+          <div class="content-wrapper">
+            <div class="content-body">
+              <div class="auth-wrapper">
+                <div class="auth-inner py-2">
+                  <div class="card mb-0">
+                    <div class="card-body">
+                      <form id="validate" class="auth-register-form" action="/updatefaq/<%= data.id %>"  method="POST"
+                        enctype="multipart/form-data" novalidate>
+
+                        <div class="mb-1">
+                          <label for="question" class="form-label">Questions</label>
+                          <textarea class="form-control" name="question" placeholder="Enter question"
+                            minlength="2" maxlength="500" rows="1"
+                            oninput="this.value = this.value.replace(/^\s+/g, '');" required><%- data.question %></textarea>
+                          <div class="invalid-feedback">Please enter a question.</div>
+                        </div>
+                        
+                        <div class="mb-1">
+                          <label for="answer" class="form-label">Answers</label>
+                          <textarea class="form-control" name="answer" placeholder="Enter answer"
+                            minlength="2" maxlength="2000" rows="12"
+                            oninput="this.value = this.value.replace(/^\s+/g, '');" required><%- data.answer %></textarea>
+                          <div class="invalid-feedback">Please enter an answer.</div>
+                        </div>
+                        
+
+                        <div class="d-flex justify-content-end">
+                          <button type="submit" class="btn btn-primary mx-2">Update</button>
+                          <a class="btn btn-primary" href="/faqlist">Back</a>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- include('../common/footer.ejs'); %>
+
+          <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+          <script src="../../../app-assets/js/core/app-menu.js"></script>
+          <script src="../../../app-assets/js/core/app.js"></script>
+         
+
+          <script>
+            (function () {
+              'use strict';
+              var form = document.getElementById('validate');
+
+              form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            })();
+          </script>
+
+
+       
+  </body>
+
+</html>

@@ -1,0 +1,106 @@
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow " id='sidebar-menu' data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item me-auto"><a class="navbar-brand" href="/dashboard"><span class="brand-logo">
+                       <img src="./../app-assets/images/icon2.png" alt="">
+                    </span>
+                    <h2 class="brand-text">Spoto</h2>
+                </a></li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="nav-item <%= ['Dashboard'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/dashboard">
+                    <i data-feather="home"></i>
+                    <span class="menu-title text-truncate" data-i18n="carrier">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Users','User Details'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/userlist">
+                    <i data-feather="users"></i>
+                    <span class="menu-title text-truncate" data-i18n="user">Users</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Providers','Provider Details',].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/providerlist">
+                    <i data-feather="users"></i>
+                    <span class="menu-title text-truncate" data-i18n="user">Providers</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Categories','Add Category','Category Details','Edit Category'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/categorylist">
+                    <i data-feather="grid"></i>
+                    <span class="menu-title text-truncate" data-i18n="user">Category</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Interests','Add Interest','Edit Interest'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/interestlist">
+                    <i data-feather="heart"></i>
+                    <span class="menu-title text-truncate" data-i18n="carrier">Interests</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Prefrence','Add Prefrence','Edit Prefrence'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/prefrencelist">
+                    <i data-feather="sliders"></i>
+                    <span class="menu-title text-truncate" data-i18n="carrier">Prefrence</span>
+                </a>
+            </li>
+        
+            <li class="nav-item <%= ['Events','Add Event','Event Details'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/eventlist">
+                    <i data-feather="calendar"></i>
+                    <span class="menu-title text-truncate" data-i18n="user">Events</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Giveaways','Add Event','Event Details'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/giveawaylist">
+                    <i data-feather="dollar-sign"></i>
+                    <span class="menu-title text-truncate" data-i18n="user">Giveaway</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['FAQ','Add FAQ',,'Edit FAQ'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/faqlist">
+                    <i data-feather="help-circle"></i>
+                    <span class="menu-title text-truncate" data-i18n="user">FAQ</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Reviews','Review Details'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/reviewlist">
+                    <i data-feather="star"></i>
+                    <span class="menu-title text-truncate" data-i18n="user">Reviews</span>
+                </a>
+            </li>
+         
+          
+            <li class="nav-item <%= ['Contact Us','Contact Details',].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/contacts">
+                    <i data-feather="phone"></i>
+                    <span class="menu-title text-truncate" data-i18n="carrier">Contact Us</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Privacy Policy'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/privacypolicy">
+                    <i data-feather="lock"></i>
+                    <span class="menu-title text-truncate" data-i18n="carrier">Privacy Policy</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['About Us'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/aboutus">
+                    <i data-feather="info"></i>
+                    <span class="menu-title text-truncate" data-i18n="carrier">About Us</span>
+                </a>
+            </li>
+            <li class="nav-item <%= ['Terms & Conditions'].includes(title) ? 'active' : '' %>">
+                <a class="d-flex align-items-center" href="/term&conditions">
+                    <i data-feather="file-text"></i>
+                    <span class="menu-title text-truncate" data-i18n="carrier">Terms & Conditions</span>
+                </a>
+            </li>
+         
+        </ul>
+    </div>
+   
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<%-include('../common/header') %>
+    <%-include('../common/navbar') %>
+        <%-include('../common/sidebar') %>
+
+            <body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click"
+                data-menu="vertical-menu-modern" data-col="">
+                <div class="app-content content">
+                    <div class="content-overlay"></div>
+                    <div class="header-navbar-shadow"></div>
+                    <div class="content-wrapper">
+                        <div class="content-header row"></div>
+                        <div class="content-body">
+                            <div class="auth-wrapper">
+                                <div class="auth-inner py-2">
+                                    <div class="card mb-0">
+                                        <div class="card-body">
+                                            <form class="auth-register-form" method="POST">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label">Review To</label>
+                                                        <input type="text" class="form-control" readonly
+                                                            value="<%= data.userr ? data.userr.firstName + ' ' + data.userr.lastName : 'N/A' %>" />
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label">Review By</label>
+                                                        <input type="text" class="form-control" readonly
+                                                            value="<%= data.userrBy ? data.userrBy.firstName + ' ' + data.userrBy.lastName : 'N/A' %>" />
+                                                    </div>
+                                                    <div class="mb-1">
+                                                        <label for="rating" class="form-label">Rating</label>
+                                                        <input type="text" class="form-control" id="rating" name="rating" readonly value="<%= data.rating ? data.rating + '/5' : 'N/A' %>" />
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <label class="form-label">Message</label>
+                                                        <textarea class="form-control" rows="4"
+                                                            readonly><%= data.messege || '—' %></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end">
+                                                    <a href="/reviewlist" class="btn btn-primary">Back</a>
+                                                </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+                <script src="../../../app-assets/js/core/app-menu.js"></script>
+                <script src="../../../app-assets/js/core/app.js"></script>
+                <%-include('../common/footer') %>
+
+            </body>
+
+</html>

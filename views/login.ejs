@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui" />
+    <meta name="description"
+        content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities." />
+    <meta name="keywords"
+        content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app" />
+    <meta name="author" content="PIXINVENT" />
+    <title>Spoto</title>
+    <link rel="apple-touch-icon" href="../../../app-assets/images/icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../app-assets/images/icon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
+        rel="stylesheet" />
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css" />
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css" />
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css" />
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css" />
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css" />
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/bordered-layout.css" />
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css" />
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css" />
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/form-validation.css" />
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/page-auth.css" />
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css" />
+    <!-- END: Custom CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #0D1B2A;
+    color: #ffffff;
+}
+
+.auth-wrapper {
+    display: flex;
+    flex-direction: column;  /* Default to column for mobile */
+    height: 100vh;  /* Full viewport height */
+    background-color: white;
+}
+
+.auth-left, .auth-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.auth-left img {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
+.vertical-divider {
+    width: 100%;
+    height: 2px;
+    background-color: #409301;
+    opacity: 0.5;
+    margin: 20px 0;
+    align-self: center; 
+}
+.auth-content {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.auth-content .header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-content h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #242323;
+}
+
+.auth-content p {
+    margin-bottom: 30px;
+    color: #202020;
+}
+
+.auth-content .form-group {
+    margin-bottom: 20px;
+}
+
+.auth-content .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #3a3939;
+}
+
+.auth-content .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dbdcdd;
+    background-color: #dbdcdd;
+    border-radius: 7px;
+    color: #333;
+}
+
+.auth-content .form-group input:focus {
+    outline: none;
+    border-color: #409301;
+}
+
+.auth-content .btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: #409301;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+.auth-content .btn-login:hover {
+    background-color: #FF8C32;
+}
+
+.auth-content .forgot-password {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    color: #9BA4B5;
+    text-decoration: none;
+}
+
+.auth-content .forgot-password:hover {
+    color: #FF6700;
+}
+
+.brand-text {
+    color: #409301;
+    font-size: 50px;
+    font-weight: 600;
+    letter-spacing: 0.01rem;
+}
+
+.jqval-error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .auth-wrapper {
+        flex-direction: row;  /* Switch to row layout */
+    }
+
+    .vertical-divider {
+        width: 2px;
+        height: auto;
+        min-height: 350px;
+        margin: 0 20px;
+    }
+
+    .auth-left, .auth-right {
+        flex: 1;
+    }
+
+    .auth-left img {
+        width: 150px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .auth-wrapper {
+        padding: 50px;
+    }
+
+    .auth-content {
+        max-width: 450px;
+    }
+
+    .auth-left img {
+        width: 180px;
+    }
+}
+
+    </style>
+    
+  
+</head>
+
+
+<body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static" data-open="click"
+    data-menu="vertical-menu-modern" data-col="blank-page">
+    <div class="auth-wrapper">
+        <!-- Left Section (Logo) -->
+        <div class="auth-left">
+            <img src="./../app-assets/images/icon2.png" alt="Logo">
+        </div>
+    
+        <!-- Divider -->
+        <div class="vertical-divider"></div>
+    
+        <!-- Right Section (Form) -->
+        <div class="auth-right">
+            <div class="auth-content">
+                <div class="header">
+                    <h2>Welcome</h2>
+                    <p>Please login to Admin Dashboard.</p>
+                </div>
+    
+                <form action="/loginpost" method="POST" id="profile">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Enter email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="btn-login">LOGIN</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/pages/page-auth-login.js"></script>
+   
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(window).on("load", function () {
+          if (feather) {
+            feather.replace({
+              width: 14,
+              height: 14,
+            });
+          }
+        });
+    </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+$(document).ready(function() {
+// Custom method to check for spaces
+jQuery.validator.addMethod("noSpace", function(value, element) {
+return value.trim().length !== 0; // Ensures the value isn't empty and has no leading/trailing spaces
+}, "Spaces are not allowed at the beginning or end.");
+
+// Initialize validation on the form with id 'profile'
+$('#profile').validate({
+rules: {
+  email: {
+    required: true,
+    email: true, // Ensures the input is a valid email
+    noSpace: true,
+    maxlength: 60
+  },
+  password: {
+    required: true,
+    noSpace: true,
+    minlength: 6, // Ensures password is at least 6 characters
+    maxlength: 60
+  }
+},
+messages: {
+  email: {
+    required: "Please enter your email",
+    email: "Please enter a valid email address",
+    maxlength: "Email can't be longer than 60 characters"
+  },
+  password: {
+    required: "Please enter your password",
+    minlength: "Password must be at least 6 characters long",
+    maxlength: "Password can't be longer than 60 characters"
+  }
+},
+errorElement: "div",
+errorClass: "jqval-error",
+errorPlacement: function(error, element) {
+  error.insertAfter(element);
+  error.slideDown(400);
+  error.animate({
+    opacity: 1
+  }, {
+    queue: false,
+    duration: 700
+  });
+},
+submitHandler: function(form) {
+  form.submit();
+}
+});
+});
+
+
+</script>
+
+<% if (messages.success) { %>
+    <script>
+        toastr.options = {
+            closeButton: true,
+            debug: false,
+            newestOnTop: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            preventDuplicates: false,
+            onclick: null,
+            showDuration: "5000",
+            hideDuration: "5000",
+            timeOut: "5000",
+            extendedTimeOut: "5000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "slideDown",
+            hideMethod: "slideUp",
+        };
+        toastr.success("<%= messages.success %>");
+    </script>
+    <% } %>
+<% if (messages.error) { %>
+    <script>
+        toastr.options = {
+            closeButton: true,
+            debug: false,
+            newestOnTop: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            preventDuplicates: false,
+            onclick: null,
+            showDuration: "5000",
+            hideDuration: "5000",
+            timeOut: "5000",
+            extendedTimeOut: "5000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "slideDown",
+            hideMethod: "slideUp",
+        };
+        toastr.error("<%= messages.error %>");
+    </script>
+<% } %>
+
+        
+</body>
+<!-- END: Body-->
+
+</html>

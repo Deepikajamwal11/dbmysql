@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<style>
+  .file_up {
+    width: 120px;
+    height: 120px;
+    background: #dedede;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 33px;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+
+  .add_img {
+    float: left;
+    padding: 0px 6px;
+    position: relative;
+  }
+
+  .add_img i {
+    position: absolute;
+    right: 12px;
+    top: 6px;
+    background: red;
+    color: #fff;
+    border-radius: 2px;
+    padding: 2px 5px;
+    cursor: pointer;
+  }
+</style>
+<%- include('../common/header.ejs'); %>
+
+  <body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click"
+    data-menu="vertical-menu-modern" data-col="">
+    <%- include('../common/navbar.ejs'); %>
+      <%- include('../common/sidebar.ejs'); %>
+
+
+        <div class="app-content content">
+          <div class="content-overlay"></div>
+          <div class="header-navbar-shadow"></div>
+          <div class="content-wrapper">
+            <div class="content-body">
+              <div class="auth-wrapper">
+                <div class="auth-inner py-2">
+                  <div class="card mb-0">
+                    <div class="card-body">
+                      <form id="validate" class="auth-register-form" action="/createevent" method="POST"
+                        enctype="multipart/form-data" novalidate>
+
+                        <div class="col-12 mb-3">
+                          <div class="latest_imgs" id="imagePreviewContainer"></div>
+                          <label for="file1" class="file_up">
+                            <i class="ph ph-camera"></i>
+                          </label>
+                          <input type="file" accept="image/*" multiple class="visually-hidden" name="images" id="file1"
+                            onchange="loadImages(event)" required>
+                          <div class="invalid-feedback" id="imageError">Please upload at least one valid image.</div>
+
+                        </div>
+                        <div class="mb-1">
+                          <label for="text" class="form-label">Title</label>
+                          <input type="text" class="form-control" id="title" name="title" placeholder="Enter title"
+                            minlength="2" maxlength="50" oninput="this.value = this.value.replace(/^\s+/g, '');"
+                            required />
+                          <div class="invalid-feedback">Please enter a title.</div>
+                        </div>
+                        <div class="mb-1">
+                          <label for="text" class="form-label">Discription</label>
+                          <input type="text" class="form-control" id="description" name="description"
+                            placeholder="Enter discription" minlength="2" maxlength="50"
+                            oninput="this.value = this.value.replace(/^\s+/g, '');" required />
+                          <div class="invalid-feedback">Please enter a discription </div>
+                        </div>
+                        <div class="mb-1">
+                          <label for="text" class="form-label">Event Date</label>
+                          <input type="date" class="form-control" id="eventDate" name="eventDate"
+                            placeholder="Enter eventDate" minlength="2" maxlength="50"
+                            oninput="this.value = this.value.replace(/^\s+/g, '');" required />
+                          <div class="invalid-feedback">Please enter a eventDate </div>
+                        </div>
+                        <div class="mb-1">
+                          <label for="text" class="form-label">Event Time</label>
+                          <input type="time" class="form-control" id="eventTime" name="eventTime"
+                            placeholder="Enter eventTime" minlength="2" maxlength="50"
+                            oninput="this.value = this.value.replace(/^\s+/g, '');" required />
+                          <div class="invalid-feedback">Please enter a eventTime </div>
+                        </div>
+                        <div class="mb-1">
+                          <label for="categoryId" class="form-label">Category</label>
+                          <select name="categoryId" class="form-control" required>
+                            <option value="">-- Select Category --</option>
+                            <% if (category.length> 0) { %>
+                              <% category.forEach((data)=> { %>
+                                <option value="<%= data.id %>">
+                                  <%= data?.name %>
+                                </option>
+                                <% }); %>
+                                  <% } else { %>
+                                    <option value="">No categories available</option>
+                                    <% } %>
+                          </select>
+                          <div class="invalid-feedback">Please select a category.</div>
+                        </div>
+
+                        <div class="mb-1">
+                          <label for="userId" class="form-label">Provider</label>
+                          <select name="userId" class="form-control" required>
+                            <option value="">-- Select Provider --</option>
+                            <% if (user.length> 0) { %>
+                              <% user.forEach((data)=> { %>
+                                <option value="<%= data.id %>">
+                                  <%= data?.firstName %>
+                                    <%= data?.lastName %>
+                                </option>
+                                <% }); %>
+                                  <% } else { %>
+                                    <option value="">No provider available</option>
+                                    <% } %>
+                          </select>
+                          <div class="invalid-feedback">Please select a Provider.</div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                          <button type="submit" class="btn btn-primary mx-2">Add</button>
+                          <a class="btn btn-primary" href="/eventlist">Back</a>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- include('../common/footer.ejs'); %>
+
+          <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+          <script src="../../../app-assets/js/core/app-menu.js"></script>
+          <script src="../../../app-assets/js/core/app.js"></script>
+
+
+          <script>
+            (function () {
+              'use strict';
+              var form = document.getElementById('validate');
+
+              form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            })();
+          </script>
+
+          <script>
+            function loadImages(event) {
+              const files = event.target.files;
+              const container = document.getElementById('imagePreviewContainer');
+              for (const file of files) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                  const div = document.createElement('div');
+                  div.classList.add('add_img', 'position-relative');
+                  div.innerHTML = `
+                    <img class="file_up" src="${e.target.result}" alt="">
+                    <i class="ph ph-trash" onclick="removeImage(this)"></i>
+                `;
+                  container.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+              }
+            }
+            function removeImage(element) {
+              element.parentElement.remove();
+            }
+
+          </script>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<head>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  
+
+    <!-- BEGIN: Head-->
+    <%- include('../common/header.ejs'); %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- END: Head-->
+
+    <style>
+        
+        .card-datatable {
+            padding: 20px; 
+        }
+       
+    </style>
+</head>
+<!-- BEGIN: Body-->
+<body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="">
+
+    <!-- BEGIN: Header-->
+    <%- include('../common/navbar.ejs'); %>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Main Menu-->
+    <%- include('../common/sidebar.ejs'); %>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-header row"></div>
+            <div class="content-body">
+                <!-- users list start -->
+                <section class="app-user-list">
+                
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-end">
+                
+                            <div class="table_search">
+                              <label for="searchInput">Search</label>
+                              <input type="search" id="searchInput" />
+                            </div>
+                          </div>
+                        <div class="card-datatable table-responsive pt-0">
+                            <table id="myTable" class="user-list-table table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Sr.no</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone Number</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% data.forEach((item, i) => { %>
+                                    <tr data-id="<%= item.id %>">
+                                        <td><%= i + 1 %></td>
+                                        <td>
+                                            <%= (item.firstName || item.lastName) ? `${item.firstName || ''} ${item.lastName || ''}`.trim() : 'No Name' %>
+                                          </td>
+                                        <td><%= item.email  || "no email"%></td>
+                                        <td><%= item.countryCode || 'N/A'%>-<%= item.phoneNumber || "N/A"%></td>
+                  
+                                        <td>
+                                            <a href="/viewcontact/<%= item.id %>" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="me-80" data-feather="eye"></i></a>
+                                            <a href="#" onclick="deleteUser('<%= item.id %>', event)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="me-80" data-feather="trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-end pt-4">   
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <!-- Previous button -->
+                                        <% if (currentPage > 1) { %>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/contacts?page=<%= currentPage - 1 %>&limit=<%= limit %>">
+                                                    Previous
+                                                </a>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#">Previous</a>
+                                            </li>
+                                        <% } %>
+                            
+                                        <!-- Page numbers -->
+                                        <% for (let i = 1; i <= totalPages; i++) { %>
+                                            <li class="page-item <%= (i === currentPage) ? 'active' : '' %>">
+                                                <a class="page-link" href="/contacts?page=<%= i %>&limit=<%= limit %>">
+                                                    <%= i %>
+                                                </a>
+                                            </li>
+                                        <% } %>
+                            
+                                        <!-- Next button -->
+                                        <% if (currentPage < totalPages) { %>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/contacts?page=<%= currentPage + 1 %>&limit=<%= limit %>">
+                                                    Next
+                                                </a>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#">Next</a>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- list section end -->
+                </section>
+                <!-- users list ends -->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <%- include('../common/footer.ejs'); %>
+    <!-- END: Footer-->
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- END: Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- END: Page JS-->
+
+    <script>
+    
+
+        $(document).ready(function() {
+            $("#myTable").DataTable
+    
+    $(window).on('load', function() {
+        if (feather) {
+            feather.replace({
+                width: 14,
+                height: 14
+            });
+        }
+    });
+
+    $(".status-toggle").on("click", function() {
+        let button = $(this);
+        let userId = button.attr("data-id");
+        let currentStatus = button.attr("data-status");
+        let newStatus = currentStatus === "1" ? "0" : "1"; 
+
+        $.ajax({
+            method: "POST",
+            url: "/contactstatus",
+            data: {
+                id: userId,
+                status: newStatus
+            },
+            success: function(response) {
+                if (response.success) {
+                    if (newStatus === "1") {
+                        button.text("Active").removeClass("btn-info").addClass("btn-primary");
+                    } else {
+                        button.text("Inactive").removeClass("btn-primary").addClass("btn-info");
+                    }
+                    button.attr("data-status", newStatus);
+                    toastr.success('Status updated successfully.');
+                } else {
+                    toastr.error('Status change failed.');
+                }
+            },
+            error: function() {
+                toastr.error('An error occurred while changing the status.');
+            }
+        });
+    });
+});
+
+
+        function deleteUser(user_id, event) {
+    event.preventDefault(); 
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-primary",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: false
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: `/deletecontact/${user_id}`,
+                data: {
+                    id: user_id
+                },
+                success: function(response) {
+                    if (response.success) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Deleted!",
+                            text: "The contact  has been deleted.",
+                            icon: "success"
+                        }).then(() => {
+                            location.reload(); 
+                        });
+                        
+                    } else {
+                        swalWithBootstrapButtons.fire({
+                            title: "Error!",
+                            text: response.message || "Something went wrong.",
+                            icon: "error"
+                        });
+                    }
+                },
+                error: function() {
+                    swalWithBootstrapButtons.fire({
+                        title: "Error!",
+                        text: "An error occurred while deleting the contact",
+                        icon: "error"
+                    });
+                }
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "The contact is safe",
+                icon: "error"
+            });
+        }
+    });
+}
+
+                          
+    </script>
+</body>  
+<!-- END: Body-->
+</html>

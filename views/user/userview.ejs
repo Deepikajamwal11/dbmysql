@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<%-include('../common/header') %>
+  <%-include('../common/navbar') %>
+    <%-include('../common/sidebar') %>
+
+      <body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click"
+        data-menu="vertical-menu-modern" data-col="">
+        <div class="app-content content">
+          <div class="content-overlay"></div>
+          <div class="header-navbar-shadow"></div>
+          <div class="content-wrapper">
+            <div class="content-header row"></div>
+            <div class="content-body">
+              <div class="auth-wrapper">
+                <div class="auth-inner py-2">
+                  <div class="card mb-0">
+                    <div class="card-body">
+                      <form class="auth-register-form" method="POST">
+                        <div class="row">
+                          <div class="mb-1 col-6">
+                            <label class="form-label fw-bold">Image</label>
+                            <div>
+                              <% if (userDetail?.profilePicture) { %>
+                                <img src="<%= userDetail.profilePicture %>" alt="User Image"
+                                  style="width: auto; height: 200px; object-fit: cover; border-radius: 20px;" />
+                                <% } else { %>
+                                  <div><span>No Image</span></div>
+                                  <% } %>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-6 mb-1">
+                            <label class="form-label fw-bold">First Name</label>
+                            <input type="text" class="form-control fw-bold" readonly
+                              value="<%= userDetail?.firstName || 'N/A' %>" />
+                          </div>
+                          <div class="col-6 mb-1">
+                            <label class="form-label fw-bold">Last Name</label>
+                            <input type="text" class="form-control fw-bold" readonly
+                              value="<%= userDetail?.lastName || 'N/A' %>" />
+                          </div>
+                          <div class="col-6 mb-1">
+                            <label class="form-label fw-bold">Email</label>
+                            <input type="text" class="form-control fw-bold" readonly
+                              value="<%= userDetail?.email || 'N/A' %>" />
+                          </div>
+                          <div class="col-6 mb-1">
+                            <label class="form-label fw-bold">Phone Number</label>
+                            <input type="text" class="form-control fw-bold" readonly
+                              value="<%= userDetail?.countryCode ? userDetail.countryCode + '-' + userDetail.phoneNumber : 'N/A' %> " />
+                          </div>
+                          <div class="col-6 mb-1">
+                            <label class="form-label fw-bold">Location</label>
+                            <input type="text" class="form-control fw-bold" readonly
+                              value="<%= userDetail?.location || 'N/A' %>" />
+                          </div>
+
+                          <div class="mb-1">
+                            <label for="categoryId" class="form-label">Interest</label>
+
+
+                            <% if (userDetail && userDetail.interests && userDetail.interests.length) { %>
+                              <ul>
+                                <% userDetail.interests.forEach(interest=> { %>
+                                  <li>
+                                    <%= interest.name %>
+                                  </li>
+                                  <% }) %>
+                              </ul>
+                              <% } else { %>
+                                <p>No interests found.</p>
+                                <% } %>
+                          </div>
+
+                          <div class="mb-1">
+                            <label for="categoryId" class="form-label">Prefrence</label>
+
+
+                            <% if (userDetail && userDetail.prefrence && userDetail.prefrence.length) { %>
+                              <ul>
+                                <% userDetail.prefrence.forEach(prefrenc=> { %>
+                                  <li>
+                                    <%= prefrenc.name %>
+                                  </li>
+                                  <% }) %>
+                              </ul>
+                              <% } else { %>
+                                <p>No prefrence found.</p>
+                                <% } %>
+                          </div>
+
+                        </div>
+                        <div class="d-flex justify-content-end">
+                          <a href="/userlist" class="btn btn-primary">Back</a>
+                        </div>
+                    </div>
+
+
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+        <script src="../../../app-assets/js/core/app-menu.js"></script>
+        <script src="../../../app-assets/js/core/app.js"></script>
+        <%-include('../common/footer') %>
+
+      </body>
+
+</html>
